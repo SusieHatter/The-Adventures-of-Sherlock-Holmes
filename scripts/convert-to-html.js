@@ -14,48 +14,25 @@
 - once ypu have the HTML string, open ./index.html and write the string to the file.
 */
 const fs = require("fs");
-const { start } = require("repl");
+
+const romanNumerals = [
+  "I",
+  "II",
+  "III",
+  "IV",
+  "V",
+  "VI",
+  "VII",
+  "VII",
+  "IX",
+  "X",
+  "XI",
+  "XII",
+  "XIII",
+];
 
 function isRomanNumeral(str) {
-  if (str === "I") {
-    return true;
-  }
-  if (str === "II") {
-    return true;
-  }
-  if (str === "III") {
-    return true;
-  }
-  if (str === "IV") {
-    return true;
-  }
-  if (str === "V") {
-    return true;
-  }
-  if (str === "VI") {
-    return true;
-  }
-  if (str === "VII") {
-    return true;
-  }
-  if (str === "VII") {
-    return true;
-  }
-  if (str === "IX") {
-    return true;
-  }
-  if (str === "X") {
-    return true;
-  }
-  if (str === "XI") {
-    return true;
-  }
-  if (str === "XII") {
-    return true;
-  }
-  if (str === "XIII") {
-    return true;
-  }
+  return romanNumerals.indexOf(str) >= 0;
 }
 
 function startsWithRomanNumeral(line) {
