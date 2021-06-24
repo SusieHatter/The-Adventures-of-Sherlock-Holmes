@@ -51,13 +51,26 @@ function endsWithBookTitle(line) {
   return splitLine[1] != "";
 }
 
+function titleLineToId(line) {
+  return line.split(".")[1].trim().replaceAll(" ", "-").toLowerCase();
+}
+
 const convert = (content) => {
   const lines = content.split("\r\n");
   let result = "";
+  result += `<div class="hidden">\n`;
   for (let i = 0; i < lines.length; i++) {
     let line = lines[i];
     if (line === "The Adventures of Sherlock Holmes") {
+      result += `</div>\n`; // End hidden content at beginning
       result += `<h1 class="main-title">${line}</h1>\n`;
+      continue;
+    }
+    if (
+      line ===
+      "*** END OF THE PROJECT GUTENBERG EBOOK THE ADVENTURES OF SHERLOCK HOLMES ***"
+    ) {
+      result += `<div class="hidden">\n`;
       continue;
     }
     if (line === "by Arthur Conan Doyle") {
@@ -69,18 +82,22 @@ const convert = (content) => {
       i += 2; // Skip empty space
       let itemsStr = "";
       while (lines[i] !== "") {
-        itemsStr += `  <li>${lines[i]}</li>\n`;
+        itemsStr += `  <li><a href="#${titleLineToId(lines[i])}">${
+          lines[i]
+        }</a></li>\n`;
         i++;
       }
       result += `<ol class="contents">\n${itemsStr}</ol>\n`;
       continue;
     }
     if (startsWithRomanNumeral(line) && endsWithBookTitle(line)) {
-      result += `<h2>${line}</h2>\n`;
+      result += `<h2 id="${titleLineToId(
+        line
+      )}" class="book-titles">${line}</h2>\n`;
       continue;
     }
     if (startsWithRomanNumeral(line)) {
-      result += `<h3>${line}</h3>\n`;
+      result += `<h3 class="chapter-titles">${line}</h3>\n`;
       continue;
     }
     if (line === "") {
@@ -92,6 +109,10 @@ const convert = (content) => {
       i++;
     }
     result += `<p>\n${paragraphStr}</p>\n`;
+    if (i === lines.length - 3) {
+      // No idea why it's '- 3'
+      result += "</div>"; // End hidden content at end
+    }
   }
   return `<!DOCTYPE html>
 <html lang="en">
@@ -100,9 +121,14 @@ const convert = (content) => {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Adventures of Sherlock Holmes</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+<div class="page-container">
+<div class="page">
 ${result}
+</div>
+</div>
 </body>
 </html>`;
 };
