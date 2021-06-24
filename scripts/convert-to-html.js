@@ -55,6 +55,20 @@ function titleLineToId(line) {
   return line.split(".")[1].trim().replaceAll(" ", "-").toLowerCase();
 }
 
+function convertLine(line) {
+  const words = line.split(" ");
+  let result = "";
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    if (word.startsWith("_") && word.endsWith("_")) {
+      result += `<em>${word.replaceAll("_", "")}</em> `;
+      continue;
+    }
+    result += `${word} `;
+  }
+  return result;
+}
+
 const convert = (content) => {
   const lines = content.split("\r\n");
   let result = "";
@@ -105,7 +119,7 @@ const convert = (content) => {
     }
     let paragraphStr = "";
     while (lines[i] !== undefined && lines[i] !== "") {
-      paragraphStr += `  ${lines[i]}\n`;
+      paragraphStr += `  ${convertLine(lines[i])}\n`;
       i++;
     }
     result += `<p>\n${paragraphStr}</p>\n`;
