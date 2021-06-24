@@ -69,6 +69,11 @@ function startsWithRomanNumeral(line) {
   return false;
 }
 
+function endsWithBookTitle(line) {
+  const splitLine = line.split(".");
+  return splitLine[1] != "";
+}
+
 const convert = (content) => {
   const lines = content.split("\r\n");
   let result = "";
@@ -93,8 +98,12 @@ const convert = (content) => {
       result += `<ol class="contents">\n${itemsStr}</ol>\n`;
       continue;
     }
-    if (startsWithRomanNumeral(line)) {
+    if (startsWithRomanNumeral(line) && endsWithBookTitle(line)) {
       result += `<h2>${line}</h2>\n`;
+      continue;
+    }
+    if (startsWithRomanNumeral(line)) {
+      result += `<h3>${line}</h3>\n`;
       continue;
     }
     if (line === "") {
