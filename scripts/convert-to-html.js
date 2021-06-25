@@ -91,6 +91,7 @@ const convert = (content) => {
     if (line === "by Arthur Conan Doyle") {
       result += `<span class="author">${line}</span>\n`;
       result += `</div>\n`; // End header
+      result += `<hr>\n`;
       continue;
     }
     if (line === "Contents") {

@@ -50,6 +50,11 @@ body {
 
 .page {
   width: 800px;
+  padding: 24px;
+}
+
+.header {
+  margin-bottom: 24px;
 }
 
 .main-title {
@@ -65,20 +70,12 @@ body {
 }
 
 .contents {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 300px;
-  z-index: 100;
-  padding: 24px;
-  height: 100vh;
-  background: var(--darkgrey);
+  padding-top: 24px;
 }
 
 .contents-heading {
   font-size: 40px;
   font-style: bold;
-  color: var(--white);
 }
 
 .contents-list {
@@ -93,8 +90,8 @@ body {
 }
 
 .contents-list a {
-  color: var(--white);
   transition: all 0.5s ease;
+  color: var(--darkgrey);
 }
 
 .contents-list a:visited {
@@ -102,7 +99,7 @@ body {
 }
 
 .contents-list a:hover {
-  color: var(--lightbrown);
+  color: var(--darkbrown);
 }
 
 .project-gutenberg-img {
@@ -127,4 +124,33 @@ p {
   line-height: 2;
   margin: 1em 0;
   font-size: 1.2em;
+}
+
+@media (min-width: 1400px) {
+  .contents {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    z-index: 100;
+    padding: 24px;
+    height: 100vh;
+    background: var(--darkgrey);
+  }
+
+  .contents-heading {
+    color: var(--white);
+  }
+
+  .contents-list a {
+    color: var(--white);
+  }
+
+  .contents-list a:visited {
+    color: var(--orange);
+  }
+
+  .contents-list a:hover {
+    color: var(--lightbrown);
+  }
 }
