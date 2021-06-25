@@ -19,16 +19,24 @@
   font-weight: 700;
 }
 
+:root {
+  --darkgrey: #252422;
+  --darkbrown: #403d39;
+  --lightbrown: #ccc5b9;
+  --white: #fffcf2;
+  --orange: #eb5e28;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "merriweather";
 }
 
 body {
-  background-color: rgb(227, 248, 255);
+  background-color: var(--lightbrown);
   color: #111;
-  font-family: "merriweather";
 }
 
 .hidden {
@@ -56,17 +64,50 @@ body {
   margin: 48px 0;
 }
 
+.contents {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  z-index: 100;
+  padding: 24px;
+  height: 100vh;
+  background: var(--darkgrey);
+}
+
 .contents-heading {
   font-size: 40px;
   font-style: bold;
-  margin: 24px 0;
+  color: var(--white);
 }
 
-.contents {
+.contents-list {
   line-height: 1.5em;
   font-size: 15px;
-  margin-left: 50px;
+  margin-left: 24px;
   list-style-type: none;
+}
+
+.contents-list li {
+  margin: 10px 0;
+}
+
+.contents-list a {
+  color: var(--white);
+  transition: all 0.5s ease;
+}
+
+.contents-list a:visited {
+  color: var(--orange);
+}
+
+.contents-list a:hover {
+  color: var(--lightbrown);
+}
+
+.project-gutenberg-img {
+  width: 50px;
+  margin: 24px 105px;
 }
 
 .book-titles {

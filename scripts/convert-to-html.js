@@ -77,6 +77,7 @@ const convert = (content) => {
     let line = lines[i];
     if (line === "The Adventures of Sherlock Holmes") {
       result += `</div>\n`; // End hidden content at beginning
+      result += `<div class="header">\n`;
       result += `<h1 class="main-title">${line}</h1>\n`;
       continue;
     }
@@ -89,19 +90,23 @@ const convert = (content) => {
     }
     if (line === "by Arthur Conan Doyle") {
       result += `<span class="author">${line}</span>\n`;
+      result += `</div>\n`; // End header
       continue;
     }
     if (line === "Contents") {
+      result += `<div class="contents">\n`;
       result += `<h2 class="contents-heading">${line}</h2>\n`;
       i += 2; // Skip empty space
       let itemsStr = "";
       while (lines[i] !== "") {
-        itemsStr += `  <li><a href="#${titleLineToId(lines[i])}">${
+        itemsStr += `  <li class="link"><a href="#${titleLineToId(lines[i])}">${
           lines[i]
         }</a></li>\n`;
         i++;
       }
-      result += `<ol class="contents">\n${itemsStr}</ol>\n`;
+      result += `<ol class="contents-list">\n${itemsStr}</ol>\n`;
+      result += `<a href="https://gutenberg.org/ebooks/1661"><img class="project-gutenberg-img" src="./assets/project-gutenberg.png"/></a>\n`;
+      result += `</div>\n`; // End contents
       continue;
     }
     if (startsWithRomanNumeral(line) && endsWithBookTitle(line)) {
