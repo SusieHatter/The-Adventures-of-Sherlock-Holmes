@@ -126,6 +126,19 @@ p {
   font-size: 1.2em;
 }
 
+.hat-img {
+  width: 32px;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.hat-img:hover {
+  transition: all 0.5s ease-in-out;
+  filter: brightness(50%);
+}
+
 @media (min-width: 1400px) {
   .contents {
     position: fixed;

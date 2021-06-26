@@ -146,9 +146,11 @@ const convert = (content) => {
 <body>
 <div class="page-container">
 <div class="page">
+<img class='hat-img' onclick="goToTheTop()" src="assets/hat.png">
 ${result}
 </div>
 </div>
+<script src="script.js"></script>
 </body>
 </html>`;
 };
